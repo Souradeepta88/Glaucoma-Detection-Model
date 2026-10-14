@@ -1,0 +1,6 @@
+PapilaDB/
+images_224/
+__pycache__/
+venv/
+.vscode/
+*.pyc

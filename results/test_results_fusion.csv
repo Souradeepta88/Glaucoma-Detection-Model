@@ -1,0 +1,5 @@
+Model,Accuracy,Sensitivity,Specificity,Precision,F1,ROC-AUC,TP,TN,FP,FN
+CNN alone,0.833,0.421,0.954,0.727,0.533,0.818,8,62,3,11
+Age only (LR),0.631,0.684,0.615,0.342,0.456,0.734,13,40,25,6
+Fusion: clinical + CNN (LR) [primary],0.798,0.737,0.815,0.538,0.622,0.83,14,53,12,5
+Fusion: clinical + CNN (XGBoost),0.762,0.684,0.785,0.481,0.565,0.788,13,51,14,6
