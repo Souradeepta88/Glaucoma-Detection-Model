@@ -55,6 +55,8 @@ for fold, (tr_i, va_i) in enumerate(sgkf.split(train_all, train_all["Target"],
             criterion(model(x), y).backward()
             optimizer.step()
 
+    os.makedirs(os.path.join(base, "models"), exist_ok=True)
+    torch.save(model.state_dict(), os.path.join(base, "models", f"resnet18_fold{fold}.pt"))
     oof[va_i] = predict(model, va_df)
     test_preds.append(predict(model, test_df))
     auc = roc_auc_score(va_df["Target"], oof[va_i])

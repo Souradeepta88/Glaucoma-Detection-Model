@@ -7,6 +7,7 @@ from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import (confusion_matrix, accuracy_score, precision_score,
                              recall_score, f1_score, roc_auc_score, roc_curve)
+import joblib
 from imblearn.pipeline import Pipeline
 from imblearn.over_sampling import SMOTE
 from xgboost import XGBClassifier
@@ -84,6 +85,10 @@ probs = {"CNN alone": test["CNN_prob"].values}
 for name, (cols, pipe) in candidates.items():
     pipe.fit(train[cols], y)
     probs[name] = pipe.predict_proba(test[cols])[:, 1]
+    if "[primary]" in name:
+        os.makedirs(os.path.join(base, "models"), exist_ok=True)
+        joblib.dump({"pipeline": pipe, "features": cols},
+                    os.path.join(base, "models", "fusion_lr.joblib"))
 
 out = []
 plt.figure(figsize=(6.5, 5))
